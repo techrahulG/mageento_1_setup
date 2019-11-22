@@ -1,7 +1,5 @@
 # mageento_1_setup
 Dockerfile and Docker-compose.yml file for magento 1
-
-
 #Dockerfile 
 # Dockerfile start with FROM Tag which is allow to pull image
 FROM centos:7
