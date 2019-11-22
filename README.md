@@ -104,6 +104,23 @@ allow you to make changes in prodution environment also
        environment:
               PRODUCTION: 'true'    
       
+port tag is use to expose ports
+
+      ports:
+             - "60065:80"
       
+ volume tag is use to mount the volumes from inside container to outside
       
-              
+      volumes:
+          - /devops/rahul/project-name/data:/var/www/html/project-name
+         - /devops/rahul/project-name/nginx:/etc/nginx/conf.d
+         - /devops/rahul/project-name/logs:/var/log/nginx
+       
+privileged tag is for grant permission to container.
+
+      privileged: true
+
+at the end you need to  define the volumes.
+
+      volumes:
+      container-volume:
