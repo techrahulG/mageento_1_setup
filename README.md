@@ -1,7 +1,7 @@
 # magento_1_setup
 Dockerfile and Docker-compose.yml file for magento 1
 # Dockerfile 
-# Dockerfile start with FROM Tag which is allow to pull image
+#Dockerfile start with FROM Tag which is allow to pull image
 FROM centos:7
 #RUN tag is use to run command inside the image you have pulled
 RUN yum install -y net-tools
@@ -67,3 +67,18 @@ CMD /usr/sbin/init
 
 
 
+# docker-compose.yml
+#version is very important part of this file which is depend on docker version.
+version: "3.3"
+
+services:
+  magento:
+    build: .     ---- #here Dockerfile is getting called
+    image: 'rahuldock16/magento'    ------- #after building Dockerfile this will tag image with name and conta
+    container_name: 'magento_1'     ------- #set the container name
+     
+ environment:
+      PRODUCTION: 'true'    ------#allow you to make changes in prodution environment also
+      
+      
+              
