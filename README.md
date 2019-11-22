@@ -139,4 +139,8 @@ at the end you need to  define the volumes.
   
   once you clone the repository you need to update the root directory name with project_name inside default.conf file.
   
- 
+  
+  # To connect database 
+   
+once you have launced the magento container and then next is to connect it with database for this you need to edit the local.xml file insde the /app/etc/local.xml in root directory.
+
