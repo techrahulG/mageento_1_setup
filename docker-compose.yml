@@ -1,0 +1,20 @@
+version: "3.3"
+services:
+  magento:
+    build: .
+    image: 'rahuldock16/magento'
+    container_name: 'magento_1'
+    environment:
+      PRODUCTION: 'true'
+    ports:
+      - "60065:80"
+    volumes:
+       - /devops/rahul/project-name/data:/var/www/html/project-name
+       - /devops/rahul/project-name/nginx:/etc/nginx/conf.d
+       - /devops/rahul/project-name/logs:/var/log/nginx
+    privileged: true
+
+
+volumes:
+  container-volume:
+

@@ -1,0 +1,60 @@
+FROM centos:7
+RUN yum install -y net-tools
+RUN yum update -y
+RUN yum install -y  https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN yum install -y  http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+RUN rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+RUN curl -sL https://rpm.nodesource.com/setup_8.x | bash -
+RUN yum-config-manager --enable remi-php56
+RUN yum install -y \
+       php \
+       php-mcrypt \
+       php-cli \
+       php-gd \
+       php-curl \
+       php-mysql \
+       php-ldap\
+       php-zip \
+       php-fileinfo \
+       php-fpm \
+       php-devel \
+       php-mbstring \
+       php-mcrypt \
+       php-soap \
+       php-apc \
+       php-common \
+       php-pear \
+    yum install -y git \
+    yum install -y initscripts \
+    yum install -y wget \
+    yum install epel-release \
+    yum install -y nginx \
+    yum install -y firewalld \
+    yum install -y mariadb-server \
+    yum install -y nodejs
+
+RUN   sed -i "s|cgi.fix_pathinfo=1|cgi.fix_pathinfo=0|g" /etc/php.ini
+RUN sed -i '/cgi.fix_pathinfo/s/^;//g' /etc/php.ini
+
+COPY  default.conf  /etc/nginx/conf.d
+#COPY  index.html  /var/www/html
+
+
+ENV container=docker
+
+RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
+rm -f /lib/systemd/system/multi-user.target.wants/*;\
+rm -f /etc/systemd/system/*.wants/*;\
+rm -f /lib/systemd/system/local-fs.target.wants/*; \
+rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+rm -f /lib/systemd/system/basic.target.wants/*;\
+rm -f /lib/systemd/system/anaconda.target.wants/*;
+
+
+RUN systemctl enable nginx.service
+RUN systemctl enable php-fpm.service
+#RUN systemctl start nginx.service
+#RUN systemctl start php-fpm.service
+expose 80
+CMD /usr/sbin/init
