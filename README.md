@@ -6,14 +6,14 @@ Dockerfile
 # Dockerfile start with FROM Tag which is allow to pull image
 FROM centos:7
 # RUN tag is use to run command inside the image you have pulled
- RUN yum install -y net-tools
- RUN yum update -y
- RUN yum install -y  https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
- RUN yum install -y  http://rpms.remirepo.net/enterprise/remi-release-7.rpm
- RUN rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
- RUN curl -sL https://rpm.nodesource.com/setup_8.x | bash -
- RUN yum-config-manager --enable remi-php56
- RUN yum install -y \
+RUN yum install -y net-tools
+RUN yum update -y
+RUN yum install -y  https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN yum install -y  http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+RUN rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+RUN curl -sL https://rpm.nodesource.com/setup_8.x | bash -
+RUN yum-config-manager --enable remi-php56
+RUN yum install -y \
        php \
        php-mcrypt \
        php-cli \
