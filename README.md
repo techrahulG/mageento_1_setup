@@ -1,16 +1,27 @@
 # magento_1_setup
 Dockerfile and Docker-compose.yml file for magento 1
 # Dockerfile 
+
 #Dockerfile start with FROM Tag which is allow to pull image
+
 FROM centos:7
+
 #RUN tag is use to run command inside the image you have pulled
+
 RUN yum install -y net-tools
+
 RUN yum update -y
+
 RUN yum install -y  https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
 RUN yum install -y  http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+
 RUN rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+
 RUN curl -sL https://rpm.nodesource.com/setup_8.x | bash -
+
 RUN yum-config-manager --enable remi-php56
+
 RUN yum install -y \
        php \
        php-mcrypt \
@@ -69,15 +80,22 @@ CMD /usr/sbin/init
 # docker-compose.yml
 #version is very important part of this file which is depend on docker version.
 version: "3.3"
+
+#inside services you can define project title.
 services:
   magento:
-   ---- #here Dockerfile is getting called
-    build: .       #after building Dockerfile this will tag image with name and container 
-    image: 'rahuldock16/magento'        #set the container name
-    container_name: 'magento_1'         #define container name.
-     
+  
+#here Dockerfile is getting called   
+build: .  
+
+#after building Dockerfile this will tag image with name and container
+image: 'rahuldock16/magento'       
+#set the container name 
+container_name: 'magento_1'        
+#allow you to make changes in prodution environment also
  environment:
-      PRODUCTION: 'true'    ------#allow you to make changes in prodution environment also
+      PRODUCTION: 'true'    
+      
       
       
               
