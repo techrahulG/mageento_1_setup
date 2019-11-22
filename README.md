@@ -1,5 +1,7 @@
 # magento_1_setup
-Dockerfile and Docker-compose.yml file for magento 1
+This Repo has all related documents to stand up the magento 1 container including  Dockerfile, Docker-compose.yml and default.conf.
+
+please follow the all steps one by one according to Document.
 # Dockerfile 
 
 Dockerfile start with FROM Tag which is allow to pull image
