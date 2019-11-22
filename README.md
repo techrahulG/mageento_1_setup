@@ -2,7 +2,7 @@
 Dockerfile and Docker-compose.yml file for magento 1
 
 
-Dockerfile 
+#Dockerfile 
 # Dockerfile start with FROM Tag which is allow to pull image
 FROM centos:7
 # RUN tag is use to run command inside the image you have pulled
@@ -45,4 +45,27 @@ RUN sed -i '/cgi.fix_pathinfo/s/^;//g' /etc/php.ini
 
 # you have to copy your default.conf file inside containers /etc/nginx/conf.d
 COPY  default.conf  /etc/nginx/conf.d
+
+# when you check for services of nginx and php-fpm youll get D-Bus error to avoid that this is the solution
+ENV container=docker
+RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
+rm -f /lib/systemd/system/multi-user.target.wants/*;\
+rm -f /etc/systemd/system/*.wants/*;\
+rm -f /lib/systemd/system/local-fs.target.wants/*; \
+rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+rm -f /lib/systemd/system/basic.target.wants/*;\
+rm -f /lib/systemd/system/anaconda.target.wants/*;
+
+#service will start automatically but we need to enable it.
+RUN systemctl enable nginx.service
+RUN systemctl enable php-fpm.service
+
+#To expose port 80 for cotainer
+expose 80
+
+# For  run subsequent commands of services
+CMD /usr/sbin/init
+
+
 
