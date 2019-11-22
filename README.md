@@ -1,9 +1,9 @@
-# mageento_1_setup
+# magento_1_setup
 Dockerfile and Docker-compose.yml file for magento 1
-#Dockerfile 
+# Dockerfile 
 # Dockerfile start with FROM Tag which is allow to pull image
 FROM centos:7
-# RUN tag is use to run command inside the image you have pulled
+#RUN tag is use to run command inside the image you have pulled
 RUN yum install -y net-tools
 RUN yum update -y
 RUN yum install -y  https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
@@ -37,14 +37,14 @@ RUN yum install -y \
     yum install -y firewalld \
     yum install -y mariadb-server \
     yum install -y nodejs
-# here it is updating cgi.fix_pathinfo=1 to cgi.fix_pathinfo=0 and also uncommenting it.
+#here it is updating cgi.fix_pathinfo=1 to cgi.fix_pathinfo=0 and also uncommenting it.
 RUN   sed -i "s|cgi.fix_pathinfo=1|cgi.fix_pathinfo=0|g" /etc/php.ini
 RUN sed -i '/cgi.fix_pathinfo/s/^;//g' /etc/php.ini
 
-# you have to copy your default.conf file inside containers /etc/nginx/conf.d
+#you have to copy your default.conf file inside containers /etc/nginx/conf.d
 COPY  default.conf  /etc/nginx/conf.d
 
-# when you check for services of nginx and php-fpm youll get D-Bus error to avoid that this is the solution
+#when you check for services of nginx and php-fpm youll get D-Bus error to avoid that this is the solution
 ENV container=docker
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
 rm -f /lib/systemd/system/multi-user.target.wants/*;\
@@ -62,7 +62,7 @@ RUN systemctl enable php-fpm.service
 #To expose port 80 for cotainer
 expose 80
 
-# For  run subsequent commands of services
+#For  run subsequent commands of services
 CMD /usr/sbin/init
 
 
