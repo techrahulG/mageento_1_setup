@@ -91,7 +91,7 @@ here Dockerfile is getting called
 
       build: .  
 
-after building Dockerfile this will tag image with name and container
+after building Dockerfile this will tag image with name 
 
     image: 'rahuldock16/magento'    
     
