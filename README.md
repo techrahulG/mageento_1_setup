@@ -43,7 +43,7 @@ RUN tag is use to run command inside the image you have pulled
       yum install -y nodejs
 here it is updating cgi.fix_pathinfo=1 to cgi.fix_pathinfo=0 and also uncommenting it.
 
-      RUN   sed -i "s|cgi.fix_pathinfo=1|cgi.fix_pathinfo=0|g" /etc/php.ini
+      RUN sed -i "s|cgi.fix_pathinfo=1|cgi.fix_pathinfo=0|g" /etc/php.ini
       RUN sed -i '/cgi.fix_pathinfo/s/^;//g' /etc/php.ini
 
 you have to copy your default.conf file inside containers /etc/nginx/conf.d
@@ -102,17 +102,17 @@ set the container name
 allow you to make changes in prodution environment also
 
        environment:
-              PRODUCTION: 'true'    
+          PRODUCTION: 'true'    
       
 port tag is use to expose ports
 
       ports:
-             - "60065:80"
+        - "60065:80"
       
  volume tag is use to mount the volumes from inside container to outside
       
       volumes:
-          - /devops/rahul/project-name/data:/var/www/html/project-name
+         - /devops/rahul/project-name/data:/var/www/html/project-name
          - /devops/rahul/project-name/nginx:/etc/nginx/conf.d
          - /devops/rahul/project-name/logs:/var/log/nginx
        
@@ -123,4 +123,4 @@ privileged tag is for grant permission to container.
 at the end you need to  define the volumes.
 
       volumes:
-      container-volume:
+        container-volume:
