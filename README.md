@@ -132,10 +132,10 @@ at the end you need to  define the volumes.
         
    #  Git Cloning part
   
-  now clone the repository inside the root directory(/var/www/html or to the mount point).
+  now clone the repository inside the root directory ( /var/www/html or to the mount point).
   
   
-  # default.com
+  # default.conf
   
   once you clone the repository you need to update the root directory name with project_name inside default.conf file.
   
